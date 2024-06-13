@@ -7,8 +7,7 @@ const createUl = document.querySelector(".create-ul"),
 let i = 0
 
 
-createBtn.addEventListener('click', ()=> {
-    
+createBtn.addEventListener('click', () => {
     
     if(i % 2 == 0){
         createUl.style.width = '200px'

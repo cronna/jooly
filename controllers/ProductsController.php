@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\entity\Products;
+use app\repository\ProductRepository;
 
 class ProductsController extends \yii\web\Controller
 {
@@ -18,8 +19,11 @@ class ProductsController extends \yii\web\Controller
      */
     public function actionView($id)
     {
+        $product = ProductRepository::getProductById($id);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'product' => $product
         ]);
     }
 

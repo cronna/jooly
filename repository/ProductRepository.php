@@ -10,4 +10,8 @@ class ProductRepository
         return Products::find()->all();
     }
 
+    public static function getProductById($id){
+        return Products::findOne(['id' => $id]);
+    }
+
 }
