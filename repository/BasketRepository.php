@@ -16,4 +16,10 @@ class BasketRepository
     {
         return Basket::find()->all();
     }
+
+    public static function deleteAllFromBasket()
+    {
+        Basket::deleteAll();
+    }
+
 }

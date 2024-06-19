@@ -9,6 +9,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\web\IdentityInterface;
 
 AppAsset::register($this);
 
@@ -44,10 +45,17 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             </div>
 
             <div class="controlls">
-                <a href='/user/authorisation' class="user-profile-link">
-                    <svg style='margin-top: -3px;' width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 11.831l-7 3.669S3 17 3.61 18.606C4.22 20.212 5 20.5 6.5 20.5h11c1.5 0 2.28-.29 2.89-1.895C21 17 21.5 15.5 21.5 15.5l-7-3.669m2.668 1.399C16 14.7 13.923 15.5 12.02 15.5a7.12 7.12 0 0 1-3.32-.8M17 7.5a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" stroke="#000"></path></svg>
-                    <span>Войти</span>
-                </a>
+                <?php if (Yii::$app->user->isGuest) {?>
+                    <a href='/user/authorisation' class="user-profile-link">
+                        <svg style='margin-top: -3px;' width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 11.831l-7 3.669S3 17 3.61 18.606C4.22 20.212 5 20.5 6.5 20.5h11c1.5 0 2.28-.29 2.89-1.895C21 17 21.5 15.5 21.5 15.5l-7-3.669m2.668 1.399C16 14.7 13.923 15.5 12.02 15.5a7.12 7.12 0 0 1-3.32-.8M17 7.5a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" stroke="#000"></path></svg>
+                        <span>Войти</span>
+                    </a>
+                <?php } else{?>
+                    <a href='/user/profile?id=<?= Yii::$app->user->id ?>' class="user-profile-link">
+                        <svg style='margin-top: -3px;' width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 11.831l-7 3.669S3 17 3.61 18.606C4.22 20.212 5 20.5 6.5 20.5h11c1.5 0 2.28-.29 2.89-1.895C21 17 21.5 15.5 21.5 15.5l-7-3.669m2.668 1.399C16 14.7 13.923 15.5 12.02 15.5a7.12 7.12 0 0 1-3.32-.8M17 7.5a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" stroke="#000"></path></svg>
+                        <span>Профиль</span>
+                    </a>
+                <?php } ?>
                 <a href='#' class="favorite-link">
                     <svg style='margin-top: -3px;' width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M12 7.5h.5c0-2.026 2.194-4 4.44-4 3.024 0 4.56 2.412 4.56 5.262C21.5 15.894 12 20.5 12 20.5S2.5 15.894 2.5 8.762C2.5 5.912 4.036 3.5 7.06 3.5c2.246 0 4.44 1.974 4.44 4h.5z" stroke="#000"></path></svg>
                     <span>Избранное</span>

@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="products-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -21,6 +21,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'quantity')->textInput() ?>
 
     <?= $form->field($model, 'category_id')->textInput() ?>
+
+    <?= $form->field($model, 'img')->fileInput() ?>
+    
+    <?= $form->field($model, 'img2')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

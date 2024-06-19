@@ -56,24 +56,4 @@ class Products extends \yii\db\ActiveRecord
             'category_id' => 'Category ID',
         ];
     }
-
-    /**
-     * Gets query for [[Baskets]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getBaskets()
-    {
-        return $this->hasMany(Basket::class, ['product_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Category]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductsByCategoryId($id)
-    {
-        return $this->hasMany(Products::class, ['id'=>'category_id']);
-    }
 }

@@ -33,10 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row row-cols-4 gap-3">
         <?php foreach($products as $product): ?>
-            <?php if($product->category_id === $model->id):?>
                 <div class="product-card">
                     <a href='/products/view?id=<?= $product->id ?>' class="card-body">
-                        <div class="card-img"><img src="/img/force1.webp" alt="">  </div>
+                        <div class="card-img"><img src="/products_img/<?= $product->img ?>" alt=""></div>
                         <div class="card-content">
                             <h5 class="card-price card-price<?= $product->id; ?>">
                             <script>
@@ -63,8 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <span>добавить в корзину</span>
                     </a>
                 </div>
-                
-            <?php endif; ?>
         <?php endforeach; ?>
     </div>
 

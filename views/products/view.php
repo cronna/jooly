@@ -18,8 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="product-page">
         <div class="img-desc">
             <div class="product-img">
-                <img src="/img/force1.webp" alt="">   
-                <img src="/img/force2.webp" alt="">   
+                <img src="/products_img/<?= $product->img ?>" alt="">   
+                <img src="/products_img/<?= $product->img2 ?>" alt="">   
             </div>
             <span class='product-desc'>
                 <b>Описание:</b>

@@ -30,7 +30,6 @@ class Categories extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['description'], 'string'],
             [['title'], 'string', 'max' => 255],
         ];
     }

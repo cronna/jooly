@@ -14,4 +14,8 @@ class ProductRepository
         return Products::findOne(['id' => $id]);
     }
 
+    public static function getProductsByCategoryId($id)
+    {
+        return Products::find()->where(['category_id' => $id])->all();
+    }
 }

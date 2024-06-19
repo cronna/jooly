@@ -25,11 +25,13 @@ $this->title = 'Каталог';
     <div class="row row-cols-4 gap-3">
         <?php foreach($categories as $category): ?>
             <a href='/catalog/view?id=<?= $category->id ?>' class="col card">
-                <div class="card-body">
+                <div class="category-card-body">
+                    <img class='category-img' style='width: 150px;' src="/category_img/<?= $category->img ?>" alt="">
                     <h3 class="card-title"><?= $category->title ?></h5>
                 </div>
             </a>
-        <?php endforeach; ?>
+        <?php endforeach;
+        ?>
     </div>
 
 

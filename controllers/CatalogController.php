@@ -9,6 +9,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\repository\CategoryRepository;
 use app\repository\ProductRepository;
+use yii\web\UploadedFile;
+use Yii;
 
 /**
  * CategoryController implements the CRUD actions for Categories model.
@@ -55,7 +57,7 @@ class CatalogController extends Controller
      */
     public function actionView($id)
     {
-        $products = ProductRepository::getAll();
+        $products = ProductRepository::getProductsByCategoryId($id);
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -72,10 +74,12 @@ class CatalogController extends Controller
     {
         $model = new Categories();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if (Yii::$app->request->isPost) {
+            $model->load($this->request->post());
+            $model->img = UploadedFile::getInstance($model, 'img');
+            $model->img->saveAs("category_img/{$model->img->baseName}.{$model->img->extension}");
+            $model->save(false);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             $model->loadDefaultValues();
         }

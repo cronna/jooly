@@ -3,6 +3,8 @@
 namespace app\controllers;
 use app\entity\Products;
 use app\repository\ProductRepository;
+use Yii;
+use yii\web\UploadedFile;
 
 class ProductsController extends \yii\web\Controller
 {
@@ -36,10 +38,14 @@ class ProductsController extends \yii\web\Controller
     {
         $model = new Products();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if (Yii::$app->request->isPost) {
+            $model->load($this->request->post());
+            $model->img = UploadedFile::getInstance($model, 'img');
+            $model->img->saveAs("products_img/{$model->img->baseName}.{$model->img->extension}");
+            $model->img2 = UploadedFile::getInstance($model, 'img2');
+            $model->img2->saveAs("products_img/{$model->img2->baseName}.{$model->img2->extension}");
+            $model->save(false);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             $model->loadDefaultValues();
         }
