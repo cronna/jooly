@@ -42,7 +42,7 @@ use kv4nt\owlcarousel\OwlCarouselWidget;
                 <img src="/img/mini_banner1.png" alt="">
                 <span>Летние кроссовки →</span>
             </a>
-            <a href="#" class="m-b-item">
+            <a href="/catalog/" class="m-b-item">
                 <img src="/img/mini_banner2.png" alt="">
                 <span>Выгодное предложение →</span>
             </a>  
