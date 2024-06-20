@@ -2,11 +2,17 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\repository\ProductRepository;
 
 /** @var yii\web\View $this */
 /** @var app\entity\Products $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var yii\widgets\ActiveForm $form 
+ * @var $cat;
+*/
+
 ?>
+
+
 
 <div class="products-form">
 
@@ -20,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'quantity')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->dropDownList($cat) ?>
 
     <?= $form->field($model, 'img')->fileInput() ?>
     

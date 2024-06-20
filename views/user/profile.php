@@ -30,7 +30,15 @@ foreach($orders as $order){
     <div class="profile-card basket-info">
         <div class="p-c-title">
             <h3><?= $user->name, ' ', $user->surname ?></h3>
-            <?= Html::a('<svg xmlns="http://www.w3.org/2000/svg" fill="gray" viewBox="0 0 50 50" width="20px" height="20px"><path d="M 43.050781 1.9746094 C 41.800781 1.9746094 40.549609 2.4503906 39.599609 3.4003906 L 38.800781 4.1992188 L 45.699219 11.099609 L 46.5 10.300781 C 48.4 8.4007812 48.4 5.3003906 46.5 3.4003906 C 45.55 2.4503906 44.300781 1.9746094 43.050781 1.9746094 z M 37.482422 6.0898438 A 1.0001 1.0001 0 0 0 36.794922 6.3925781 L 4.2949219 38.791016 A 1.0001 1.0001 0 0 0 4.0332031 39.242188 L 2.0332031 46.742188 A 1.0001 1.0001 0 0 0 3.2578125 47.966797 L 10.757812 45.966797 A 1.0001 1.0001 0 0 0 11.208984 45.705078 L 43.607422 13.205078 A 1.0001 1.0001 0 1 0 42.191406 11.794922 L 9.9921875 44.09375 L 5.90625 40.007812 L 38.205078 7.8085938 A 1.0001 1.0001 0 0 0 37.482422 6.0898438 z"/></svg>', ['update', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
+            <div class="links">
+                <?= Html::a('<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABZElEQVR4nO2ZTUoDQRCFv1WOkfi7nwhewIleSMWFa8UTxOQEuYFnMUESY7YGjQpuAiMDvSgGxCxedyzoD5rs3qvXM11paiCTyWT+OzvAEFgAa6ASrHXQGwCdmMWfAR+ion9bK6AXa+djF1+ZEG11gKExmAInQEukXeuUwMx43CNmYcTr4mNQGo+5WtweWNXON2kB38HjSy1u39GY3ACf4ddlgGjkABuyD1wABzh9AuPgsQSOPAZ4ND7SEKkCdEPh8hApD3EBvBq/N+DYWxcq1CG20UYLZYi/AtTt7xy4Eq9Rw3sZzok8wFOiq3YFTLwHGMcIsAdcA3fi9ZDqFXJ/iNUUntto4fmPrOv9KjHxfpmber9OHwKXwK5aeBttVEoOsCG3scYq7gdbLwlGiz3j8awWHxjxWTBTDndPG8PdPmI6Yeyd4rr8HmO8Ttj1VYLiSyLSDo93Lv7EVOv1Y+18JpPJkIQfKpKPLTg0kzEAAAAASUVORK5CYII=">', ['logout', 'id' => Yii::$app->user->id], [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                        'confirm' => 'Вы уверены что хотите выйти?',
+                        'method' => 'post',
+                    ],
+                ]) ?> 
+            </div>
         </div>
         <div class="user-phone">
             <span><b>Номер телефона: </b></span>
@@ -52,24 +60,44 @@ foreach($orders as $order){
                             <span><?= $orders[0]->date ?></span>
                         </div>
                         <div class="card-footer">
-                            <div class="order-lenght"><?= count($orders) ?> товара</div>
-                            <h4><?= $orders[0]->full_price ?></h4>
+                            <div class="order-lenght"><?= count($orders) ?> 
+                                <?php $i = count($orders) ?> <?php 
+                                    if($i % 10000 === 1){
+                                        echo 'товар';
+                                    }else if($i % 10000 === 2 || $i % 10000 === 3 || $i % 10000 === 4){
+                                        echo 'товара';
+                                    }else{
+                                        echo 'товаров';
+                                    }
+                                ?>
+                            </div>
+                            <h4><?= $orders[0]->full_price ?> ₽</h4>
                         </div>
                         <ol class="order-products">
-                            <?php foreach($orders as $order): ?>
+                            <?php $i = 0;
+                             foreach($orders as $order): ?>
                                 <?php foreach($products as $product):?> 
                                     <?php if($product->id === $order->product_id):?>
                                         <li>
                                             <span><?= $product->title ?></span>
-                                            <span><?= $product->price ?></span>
+                                            <span><?= $product->price ?> ₽</span>
                                         </li>
-                                    <?php endif ?>
+                                    <?php $i++; endif ?>
                                 <?php endforeach ?>
-                            <?php endforeach ?>
+                            <?php endforeach?>
                         </ol>
                     </div>
                 </div>
+                <?php if(count($orders) == 0): ?>
+                    <div class="non-products">
+                        <div >В корзине пока пусто.</div>
+                    </div>
+                <?php endif; ?>
             <?php endforeach ?>
-        
+            <?php if(empty($arrayOrders)): ?>
+           <div class="non-products">
+                <div class="">У вас пока нет заказов.</div>
+            </div>
+        <?php endif; ?>
     </div>
 </div>

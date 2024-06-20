@@ -16,10 +16,10 @@ class CartController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['index'],
+                'only' => ['index', 'add'],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'add'],
                         'allow' => true,
                         'roles' => ['@']
                     ]

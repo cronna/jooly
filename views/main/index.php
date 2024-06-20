@@ -38,7 +38,7 @@ use kv4nt\owlcarousel\OwlCarouselWidget;
 
         <?php OwlCarouselWidget::end(); ?>
         <div class="mini-banners">
-            <a href="#" class="m-b-item">
+            <a href="/catalog/view?id=21" class="m-b-item">
                 <img src="/img/mini_banner1.png" alt="">
                 <span>Летние кроссовки →</span>
             </a>
@@ -90,17 +90,17 @@ use kv4nt\owlcarousel\OwlCarouselWidget;
 
     <div class="banner second-banner">
         <div class="mini-banners">
-            <a href="#" class="m-b-item">
+            <a href="/catalog/view?id=29" class="m-b-item">
                 <img src="/img/mini_banner3.png" alt="">
                 <span>Футболки и майки →</span>
             </a>
-            <a href="#" class="m-b-item">
+            <a href="/catalog/view?id=28" class="m-b-item">
                 <img src="/img/mini_banner4.png" alt="">
                 <span>Часы как инвестиция →</span>
             </a>  
         </div>
         <div class="container-class">
-            <a href="#" class="item-class">
+            <a class="item-class">
                 <img src="/img/banner4.png" alt="">
             </a>
         </div>

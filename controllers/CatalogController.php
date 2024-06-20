@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\repository\CategoryRepository;
 use app\repository\ProductRepository;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 use Yii;
 
 /**
@@ -22,17 +23,19 @@ class CatalogController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['admin']
+                    ]
                 ],
-            ]
-        );
+            ],
+        ];
     }
 
     /**
@@ -77,7 +80,13 @@ class CatalogController extends Controller
         if (Yii::$app->request->isPost) {
             $model->load($this->request->post());
             $model->img = UploadedFile::getInstance($model, 'img');
-            $model->img->saveAs("category_img/{$model->img->baseName}.{$model->img->extension}");
+
+            if(empty($model->img)){
+                $model->img = 'cat-zagl.jpg';
+            }else{
+                $model->img->saveAs("category_img/{$model->img->baseName}.{$model->img->extension}");
+            }
+
             $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -100,7 +109,17 @@ class CatalogController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost) {
+            $model->load($this->request->post());
+            $model->img = UploadedFile::getInstance($model, 'img');
+
+            if(empty($model->img)){
+                $model->img = CategoryRepository::getOneFromCategories(['id' => $model->id])->img;
+            }else{
+                $model->img->saveAs("category_img/{$model->img->baseName}.{$model->img->extension}");
+            };
+
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

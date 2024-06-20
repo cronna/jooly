@@ -62,8 +62,8 @@ img{
 
 .reg-form{
     border: 3px solid rgba(1, 1, 1, 0.6);
+    padding: 20px;
     width: 400px;
-    height: 480px;
     align-items: center;
     justify-content: center;
     transition: all .3s;
@@ -172,7 +172,8 @@ img{
 .controlls{
     width: 350px;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
+    gap: 20px;
     font-family: 'Jost', sans-serif;
 }
 .controlls a{
@@ -581,4 +582,19 @@ footer{
 
 .row{
     margin-top: 0;
+}
+
+.p-c-title img{
+    width: 25px;
+}
+.p-c-title .links{
+    display: flex;
+    gap: 5px;
+    margin-top: -5px;
+}
+
+.non-products{
+    margin: 100px auto;
+    align-items: cneter;
+    font-size: 30px;
 }

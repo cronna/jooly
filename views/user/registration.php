@@ -17,7 +17,12 @@ use yii\widgets\ActiveForm;
                 'errorOptions' => ['class' => 'error']
             ]
         ]) ?>
-
+        <div>
+            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Said']) ?>
+        </div>
+        <div>
+            <?= $form->field($model, 'surname')->textInput(['placeholder' => 'Akhmedov']) ?>
+        </div>
         <div>
             <?= $form->field($model, 'phone')->textInput(['placeholder' => '+7(999)999-99-99']) ?>
         </div>

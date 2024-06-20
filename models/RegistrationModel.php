@@ -10,12 +10,15 @@ class RegistrationModel extends Model
     public $phone;
     public $password;
     public $passwordRepeat;
+    public $name;
+    public $surname;
 
     public function rules()
     {
         return [
-            [['phone', 'password', 'passwordRepeat'], 'required'],
+            [['phone', 'password', 'passwordRepeat', 'name'], 'required'],
             ['phone', 'validatePhone'],
+            [['surname'], 'string', 'max'=>30],
             ['passwordRepeat', 'compare', 'compareAttribute' => 'password'],
             ['password', 'string', 'length' => [8, 12]]
         ];

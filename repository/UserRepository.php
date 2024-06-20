@@ -13,8 +13,10 @@ class UserRepository
         return Users::findOne(['phone' => $phone]);
     }
 
-    public static function createUser($phone, $password){
+    public static function createUser($phone, $password, $name, $surname){
         $user = new Users();
+        $user->name = $name;
+        $user->surname = $surname;
         $user->phone = $phone;
         $user->password = password_hash($password, PASSWORD_DEFAULT);
         $user->save();
